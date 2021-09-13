@@ -1,0 +1,5 @@
+> Requirements
+
+•	 plistlib (built-in)
+•	 matplotlib
+•	 numpy arrays

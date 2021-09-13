@@ -1,0 +1,9 @@
+> In this Project you will learn...
+
+•	 XML and property list (p-list) files
+•	 Python lists and dictionaries
+•	 Using Python set objects
+•	 Using numpy arrays
+•	 Histograms and scatter plots
+•	 Making simple plots with the matplotlib library
+•	 Creating and saving data files
