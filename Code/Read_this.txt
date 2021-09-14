@@ -1,0 +1,14 @@
+ #file:
+
+main.py -> The single and only main program file which have all the functions included and ready to Run.
+
+
+
+ #Folders: (Code Blocks for Different Sections of project)
+
+Collecting Statistics  -> The folder contain function plotStat in file plotStat.py
+
+Common tracks          -> The folder contain function findCommonTrack in file findCommonTrack.py
+
+
+Duplicates collections -> The folder contain 2 function 1> findDuplicates 2> ExtractDuplicates in files findDuplicates.py and ExtractDuplicates.py

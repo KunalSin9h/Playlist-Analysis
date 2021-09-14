@@ -1,5 +1,5 @@
 """
-Function to extract info about count of duplicate tracks 
+Function to and extract info about count of duplicate tracks 
 and write on duplicate.txt file.
   *--------------*
   |  UN-Tested!  |
@@ -7,12 +7,9 @@ and write on duplicate.txt file.
 Author: Kunal Singh
 Email: pykunalsingh@gmail.com
 """
-
-import findDuplicates
-
 #store duplicates as (count, name) tuple
 duplicates = []
-for k, v in trackNames.items():
+for k, v in findDuplicates.trackNames.items():
     if v[1] > 1:
         dups.append((v[1], k))
 # save duplicates to file
@@ -24,4 +21,4 @@ else:
 dup_file = open("duplicate.txt", "w")
 for val in duplicates:
     dup_file.write("[%d] %s\n"%(val[0], val[1]))
-f.close()
+f.close()  
