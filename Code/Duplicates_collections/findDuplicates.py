@@ -31,10 +31,10 @@ def findDuplicates(fileName):
                     count = trackNames[name][1] # tuple[1]
                     trackNames[name] = (duration, count+1)
             else:
-                # add dictionary entry as tuple
+                # add dictionary entry as tuple (duration , count)
                 trackNames[name] = (duration, 1)
         except:
-            print("---Error in finding duplicates in collection!---")
+            pass
             
            
 
