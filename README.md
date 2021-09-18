@@ -28,4 +28,6 @@ python main.py --common ../raw_data/pl1.xml ../raw_data/pl2.xml
 python main.py --stats ../raw_data/mymusic.xml
 ```
 
+### Statistics
+![Statistics Image](./Resoursec/Example_Stat.png)
   
