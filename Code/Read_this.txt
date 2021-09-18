@@ -1,3 +1,17 @@
+=======================================================================================================
+Arguments:
+'--common' -> [Takes two or more Files(xml) ]
+-------------> and find the common tracks shared between these files. and store in common.txt
+
+'--dup'  -> [Take one file(xml)] 
+---------------> and find the duplicates tracks in the playlist(files) and store in duplicates.txt
+
+'--stats'  -> [Take one file(xml)]
+--------------> and find the Statistics of data in files.
+              1> Plot graph between track ratings and track durations
+              2> distrebution of track durations
+ 
+=========================================================================================================== 
  #file:
 
 main.py -> The single and only main program file which have all the functions included and ready to Run.
@@ -6,9 +20,9 @@ main.py -> The single and only main program file which have all the functions in
 
  #Folders: (Code Blocks for Different Sections of project)
 
-Collecting Statistics  -> The folder contain function plotStat in file plotStat.py
+Collecting Statistics  -> The folder contain function 'plotStat' in file 'plotStat.py'
 
-Common tracks          -> The folder contain function findCommonTrack in file findCommonTrack.py
+Common tracks          -> The folder contain function 'findCommonTrack' in file 'findCommonTrack.py'
 
 
 Duplicates collections -> The folder contain 2 function 1> findDuplicates 2> ExtractDuplicates in files findDuplicates.py and ExtractDuplicates.py

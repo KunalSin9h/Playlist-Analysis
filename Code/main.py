@@ -4,14 +4,20 @@ from matplotlib import pyplot
 import plistlib
 import numpy as np
 
-def findCommonTrack(fileNames):   # fileNames = list of playlist filenames
+def findCommonTrack(fileNames):
+    """
+    Find common tracks in given playlist files, 
+    and save them to common.txt.
+    """   
     # a list of sets of track names
     trackNameSets = []
     for fileName in fileNames:
         # create a new set
         trackNames = set()
         # read in playlist
-        plist = plistlib.readPlist(fileName)
+        with open(fileName, 'rb') as fp:
+            plist = plistlib.load(fp)
+        
         # get the tracks
         tracks = plist['Tracks']
         # iterate through the tracks
@@ -24,7 +30,7 @@ def findCommonTrack(fileNames):   # fileNames = list of playlist filenames
                 pass
         
         # add to a list 
-        trackNamesSets.append(trackNames)
+        trackNameSets.append(trackNames)
     #get the set of common tracks
     commonTracks = set.intersection(*trackNameSets)
     # write to file 
@@ -32,7 +38,7 @@ def findCommonTrack(fileNames):   # fileNames = list of playlist filenames
         comn_file = open("common.txt", "w")
         for val in commonTracks:
             s = "%s\n" %val
-            comn_file.write(s.encode("UTF-8"))
+            comn_file.write(s)
         comn_file.close()
         print("%d common tracks found. "
                 "Track names written to common.txt."%len(commonTracks))
@@ -40,8 +46,13 @@ def findCommonTrack(fileNames):   # fileNames = list of playlist filenames
         print("No common tracks!")
 
 def plotStats(fileName):
-    # read in a playlist
-    plist = plistlib.readPlist(fileName)
+    """
+    Plot some statistics by reading track information from playlist.
+    """
+
+    with open(fileName, 'rb') as fp:
+        plist = plistlib.load(fp)
+
     # get the tracks from the playlist
     tracks = plist['Tracks']
     # create lists of songs rating and track durations
@@ -61,30 +72,36 @@ def plotStats(fileName):
         return
 
 
-# scatter plot
-x = np.array(durations, np.int32)
-# convert to minutes
-x = x/60000.0
-y = np.array(ratings, np.int32)
-pyplot.subplot(2, 1, 1)
-pyplot.plot(x, y, 'o')
-pyplot.axis([0, 1.05*np.max(x), -1, 1100])
-pyplot.xlabel('Track duration')
-pyplot.ylabel('Track rating')
+    # scatter plot
+    x = np.array(durations, np.int32)
+    # convert to minutes
+    x = x/60000.0
+    y = np.array(ratings, np.int32)
+    pyplot.subplot(2, 1, 1)
+    pyplot.plot(x, y, 'o')
+    pyplot.axis([0, 1.05*np.max(x), -1, 1100])
+    pyplot.xlabel('Track duration')
+    pyplot.ylabel('Track rating')
 
-# plot histogram
-pyplot.subplot(2, 1, 2)
-pyplot.hist(x, bins = 20)
-pyplot.xlabel('Track duration')
-pyplot.ylabel('Count')
+    # plot histogram
+    pyplot.subplot(2, 1, 2)
+    pyplot.hist(x, bins = 20)
+    pyplot.xlabel('Track duration')
+    pyplot.ylabel('Count')
 
-# show plot
-pyplot.show()
+    # show plot
+    pyplot.show()
 
 def findDuplicates(fileName):
+    """
+    Find duplicate tracks in given playlist.
+    """
+
     print("Finding duplicate tracks in %s..."%fileName)
     #read in a playlist
-    plist = plistlib.readPlist(fileName)
+    with open(fileName, 'rb') as fp:
+        plist = plistlib.load(fp)
+    
     # get the track from Tracks dictionary
     tracks = plist['Tracks']  # tracks is dictionary of all the tracks
     
@@ -113,19 +130,21 @@ def findDuplicates(fileName):
 
     #store duplicates as (count, name) tuple
     duplicates = []
-    for k, v in findDuplicates.trackNames.items():
+    for k, v in trackNames.items():
         if v[1] > 1:
-            dups.append((v[1], k))
+            duplicates.append((v[1], k))
     # save duplicates to file
-    if len(dups) > 0:
-        print("Found %d duplicate. Track names saved to duplicate.txt"%len(dups))
+    if len(duplicates) > 0:
+        print("Found %d duplicate. Track names saved to duplicate.txt"%len(duplicates))
     else:
         print("No duplicate tracks found!")
 
     dup_file = open("duplicate.txt", "w")
     for val in duplicates:
         dup_file.write("[%d] %s\n"%(val[0], val[1]))
-    f.close()    
+    dup_file.close()  
+
+# gather our code in a main() function
 
 def main():
     #create parser
@@ -142,12 +161,12 @@ def main():
     group.add_argument('--dup', dest='plFileD', required=False)
 
     # parse args
-    args = parse.parse_args()
+    args = parser.parse_args()
 
     if args.plFiles:
         # find common tracks
-        findCommonTracks(args.plFiles)
-    elif agrs.plFile:
+        findCommonTrack(args.plFiles)
+    elif args.plFile:
         # plot stats
         plotStats(args.plFile)
     elif args.plFileD:

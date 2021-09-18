@@ -1,9 +1,9 @@
 """
-given: array of playlist.(fileNames)
+given: many files , function will iterate through each file and find a set of
+all Tracks and append the sets to a list , after processing all files
+we get a list of all sets of tracks.
+now by finding the set intersection will yeild the common tracks between the files.
 
-  *--------------*
-  |  UN-Tested!  |
-  *--------------*
 Author: Kunal Singh 
 Email: pykunalsingh@gmail.com
 """
@@ -15,7 +15,9 @@ def findCommonTrack(fileNames):   # fileNames = list of playlist filenames
         # create a new set
         trackNames = set()
         # read in playlist
-        plist = plistlib.readPlist(fileName)
+        with open(fileName, 'rb') as fb:
+            plist = plistlib.load(fb)
+        
         # get the tracks
         tracks = plist['Tracks']
         # iterate through the tracks

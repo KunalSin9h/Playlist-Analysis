@@ -1,9 +1,6 @@
 """
-Function to process track name and their duration and find the 
-count of duplicates if any. 
-  *--------------*
-  |  UN-Tested!  |
-  *--------------*
+Function to process track name and their duration and give the dictionary cantaing {track_name: (duration, count)} . 
+
 Author: Kunal Singh 
 Email: pykunalsingh@gmail.com
 """
@@ -11,7 +8,9 @@ Email: pykunalsingh@gmail.com
 def findDuplicates(fileName):
     print("Finding duplicate tracks in %s..."%fileName)
     #read in a playlist
-    plist = plistlib.readPlist(fileName)
+    with open(fileName, 'rb') as fp:
+        plist = plistlib.load(fp)
+    
     # get the track from Tracks dictionary
     tracks = plist['Tracks']  # tracks is dictionary of all the tracks
     

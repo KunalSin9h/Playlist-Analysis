@@ -1,16 +1,15 @@
 """
-plotStats() method to collect statistics for the track names
+plotStats() method to collect statistics for the track data.
 
-  *--------------*
-  |  UN-Tested!  |
-  *--------------*
 Author: Kunal Singh 
 Email: pykunalsingh@gmail.com
 """
 
 def plotStats(fileName):
     # read in a playlist
-    plist = plistlib.readPlist(fileName)
+    with open(fileName, 'rb') as fp:
+        plist = plistlib.load(fp)
+    
     # get the tracks from the playlist
     tracks = plist['Tracks']
     # create lists of songs rating and track durations
