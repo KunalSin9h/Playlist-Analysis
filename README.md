@@ -29,5 +29,5 @@ python main.py --stats ../raw_data/mymusic.xml
 ```
 
 ### Statistics
-![Statistics Image](./Resoursec/Example_Stat.png)
+![Statistics Image](./Resoursec/Stats.png)
   
