@@ -82,7 +82,7 @@ def plotStats(fileName):
     y = np.array(ratings, np.int32)
     pyplot.subplot(2, 1, 1)
     pyplot.plot(x, y, 'o')
-    pyplot.axis([0, 1.05*np.max(x), -1, 1100])
+    pyplot.axis([0, 1.05*np.max(x), 0, 100])
     pyplot.xlabel('Track duration')
     pyplot.ylabel('Track rating')
 
