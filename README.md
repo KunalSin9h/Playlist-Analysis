@@ -2,6 +2,7 @@
 # Playlist Analysis
 
 A Software for analyzing iTunes Playlist using XML file.
+(plist files)
 
 
 ## Authors
