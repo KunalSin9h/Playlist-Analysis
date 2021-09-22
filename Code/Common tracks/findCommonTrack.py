@@ -23,8 +23,11 @@ def findCommonTrack(fileNames):   # fileNames = list of playlist filenames
         # iterate through the tracks
         for trackId, track in tracks.items():
             try:
-                # add the track name to a set
-                trackNames.add(track['Name'])
+                if (re.search('\d\d\/\d\d\/\d\d\s\d\:\d\d\s[PA]M', track['Name'])):
+                    pass
+                else:
+                    # add the track name to a set
+                    trackNames.add(track['Name'])
             except:
                 # ignore
                 pass

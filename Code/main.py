@@ -23,8 +23,11 @@ def findCommonTrack(fileNames):
         # iterate through the tracks
         for trackId, track in tracks.items():
             try:
-                # add the track name to a set
-                trackNames.add(track['Name'])
+                if (re.search('\d\d\/\d\d\/\d\d\s\d\:\d\d\s[PA]M', track['Name'])):
+                    pass
+                else:
+                    # add the track name to a set
+                    trackNames.add(track['Name'])
             except:
                 # ignore
                 pass
@@ -111,18 +114,21 @@ def findDuplicates(fileName):
     #iterates through the tracks(the dictionary)
     for trackId, track in tracks.items():  # trackid is track num ex. (86) but track(dict) is info about the track
         try:
-            name = track['Name']
-            duration = track['Total Time']
-            # look for existing entries
-            if name in trackNames:
-                #if name and duration match, increment the count
-                # round the track length to nearest second
-                if duration//1000 == trackNames[name][0]//1000: #tuple[0]
-                    count = trackNames[name][1] # tuple[1]
-                    trackNames[name] = (duration, count+1)
+            if (re.search('\d\d\/\d\d\/\d\d\s\d\:\d\d\s[PA]M', track['Name'])):
+                pass
             else:
-                # add dictionary entry as tuple (duration , count)
-                trackNames[name] = (duration, 1)
+                name = track['Name']
+                duration = track['Total Time']
+                # look for existing entries
+                if name in trackNames:
+                    #if name and duration match, increment the count
+                    # round the track length to nearest second
+                    if duration//1000 == trackNames[name][0]//1000: #tuple[0]
+                        count = trackNames[name][1] # tuple[1]
+                        trackNames[name] = (duration, count+1)
+                else:
+                    # add dictionary entry as tuple (duration , count)
+                    trackNames[name] = (duration, 1)
         except:
             pass
             
