@@ -12,7 +12,7 @@ A Software for analyzing iTunes Playlist using XML file.
   
 ## Running Tests
 
-To run tests, run the following command
+To run tests, run the following command.
 1. Find duplicate tracks in collection.
 
 ```bash
